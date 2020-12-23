@@ -109,7 +109,7 @@ async function jdWish() {
   }
   if ($.tuan) $.tuanList.push($.tuan)
 
-  await helpFriends()
+  //await helpFriends()
   await getUserInfo()
   await getTaskList()
   $.nowBean = parseInt($.totalBeanNum)
