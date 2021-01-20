@@ -1,5 +1,5 @@
 /*
-京东天天加速活动 国内gitee链接：https://gitee.com/lxk0301/jd_scripts/raw/master/jd_speed.js
+京东天天加速活动 国内gitee链接：https://gitee.com/LXK9301/jd_scripts/raw/master/jd_speed.js
 更新时间:2020-08-15
 每天4京豆，再小的苍蝇也是肉
 从 https://github.com/Zero-S1/JD_tools/blob/master/JD_speed.py 改写来的
@@ -9,10 +9,10 @@
 // quantumultx
 // [task_local]
 // #天天加速
-// 8 */3 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_speed.js, tag=京东天天加速, img-url=https://raw.githubusercontent.com/znz1992/Gallery/master/jdttjs.png, enabled=true
+// 8 */3 * * * https://gitee.com/LXK9301/jd_scripts/raw/master/jd_speed.js, tag=京东天天加速, img-url=https://raw.githubusercontent.com/znz1992/Gallery/master/jdttjs.png, enabled=true
 // Loon
 // [Script]
-// cron "8 */3 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_speed.js,tag=京东天天加速
+// cron "8 */3 * * *" script-path=https://gitee.com/LXK9301/jd_scripts/raw/master/jd_speed.js,tag=京东天天加速
 const name = '天天加速';
 const $ = new Env(name);
 const Key = '';//单引号内自行填写您抓取的京东Cookie
@@ -33,7 +33,7 @@ let done_distance = null;
 let task_status = null, able_energeProp_list = [], spaceEvents = [], energePropUsale = [];
 function* entrance() {
   if (!cookie) {
-    $.msg(name, '【提示】请先获取cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/', { "open-url": "https://bean.m.jd.com/" });
+    $.msg(name, '【提示】请先获取cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
     $.done();
     return
   }
@@ -245,7 +245,7 @@ function flyTask_state() {
     if (res.code === 0) {
       if (res.info.isLogin === 0) {
         $.setdata('', 'CookieJD');//cookie失效，故清空cookie。
-        $.msg(name, '【提示】京东cookie已失效,请重新登录获取', 'https://bean.m.jd.com/', {"open-url": "https://bean.m.jd.com/"});
+        $.msg(name, '【提示】京东cookie已失效,请重新登录获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
         $.done();
         return
       }
