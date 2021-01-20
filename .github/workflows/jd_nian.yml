@@ -1,16 +1,16 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: jd_joy_steal 宠汪汪偷好友狗粮与积分
+name: jd_nian 京东炸年兽
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */3 * * *'
+    - cron: '0 0,4,16 * * *'
   # watch:
   #   types: started
   repository_dispatch:
-    types: joy_steal
+    types: nian
 jobs:
   build:
 
@@ -31,16 +31,16 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }} # 使用 package-lock.json 的 Hash 作为缓存的 key。也可以使用 package.json 代替
-      - name: '运行 【宠汪汪偷好友狗粮与积分】'
-        run: |
-          cd  ~/scripts
-          npm install
-          node jd_joy_steal.js
+      - name: '运行 【京东炸年兽🧨】'
+        run: |  
+          cd ~/scripts
+          npm install 
+          node jd_nian.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_DEBUG: ${{ secrets.JD_DEBUG }}
-          
-          JOY_HELP_FEED: ${{ secrets.JOY_HELP_FEED }}
+          JDNIAN_SHARECODES: ${{secrets.JDNIAN_SHARECODES}} 
+
           #微信酱
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           #BARK推送
@@ -59,6 +59,6 @@ jobs:
           #酷推(Cool Push)推送
           QQ_SKEY: ${{ secrets.QQ_SKEY }}
           QQ_MODE: ${{ secrets.QQ_MODE }}
-                    #pushplus推送
+          #pushplus推送
           PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
           PUSH_PLUS_USER: ${{ secrets.PUSH_PLUS_USER }}
