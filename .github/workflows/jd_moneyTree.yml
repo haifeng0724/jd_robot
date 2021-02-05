@@ -4,7 +4,7 @@
 name: jd_moneyTree 京东摇钱树
 
 on:
-
+  workflow_dispatch:
   schedule:
     - cron: '40 */2 * * *'
   # watch:
@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Checkout
         run: |
-          git clone https://github.com/haifeng0724/jd_robot.git ~/scripts
+          git clone https://github.com/nbzongzong/jd_scripts1207.git ~/scripts
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
