@@ -1,16 +1,17 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: jd_newYearMoney_lottery 京东压岁钱抢百元卡(2021-2-11)
+name: jd_speed_redpocke 京东极速版红包 3-3
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 1,4,8,12 * * *'
+    - cron: '0 16 20-28 2 *'
+    - cron: '0 16 1-3 3 *'
   # watch:
   #   types: started
   repository_dispatch:
-    types: jd_newYearMoney_lottery
+    types: jd_speed_redpocke
 jobs:
   build:
 
@@ -19,7 +20,7 @@ jobs:
     steps:
       - name: Checkout
         run: |
-          git clone https://github.com/haifeng0724/jd_robot.git ~/scripts
+          git clone https://github.com/nbzongzong/jd_scripts1207.git ~/scripts
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -31,17 +32,16 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }} # 使用 package-lock.json 的 Hash 作为缓存的 key。也可以使用 package.json 代替
-      - name: '运行 【京东压岁钱抢百元卡】'
+      - name: '运行 【京东极速版红包】'
         run: |
           cd  ~/scripts
           npm install
-          node jd_newYearMoney_lottery.js
+          node jd_speed_redpocke.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_DEBUG: ${{ secrets.JD_DEBUG }}
           
 
-          
           #微信酱
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           #BARK推送

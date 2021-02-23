@@ -1,16 +1,15 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
-name: jd_nian 京东炸年兽
-
+# jd_xxl,jd_xxl_gh,jd_gyec,jd_nianCollect,jd_jdfactory
+name: 合集-东东_个护_工业品爱消除
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0,4,16 * * *'
-  # watch:
-  #   types: started
+    - cron: '30 * * * *'
+  watch:
+    types: started
   repository_dispatch:
-    types: nian
+    types: jd_xxl
 jobs:
   build:
 
@@ -19,7 +18,7 @@ jobs:
     steps:
       - name: Checkout
         run: |
-          git clone https://github.com/haifeng0724/jd_robot.git ~/scripts
+          git clone https://github.com/nbzongzong/jd_scripts1207.git ~/scripts
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -31,16 +30,20 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }} # 使用 package-lock.json 的 Hash 作为缓存的 key。也可以使用 package.json 代替
-      - name: '运行 【京东炸年兽🧨】'
-        run: |  
+      - name: '运行 【东东/个护/工业品爱消除】'
+        run: | 
           cd ~/scripts
           npm install 
-          node jd_nian.js
+          node jd_xxl.js
+          node jd_xxl_gh.js
+          node jd_gyec.js
+
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_DEBUG: ${{ secrets.JD_DEBUG }}
-          JDNIAN_SHARECODES: ${{secrets.JDNIAN_SHARECODES}} 
-
+          EXCHANGE_EC: ${{ secrets.EXCHANGE_EC }}   #默认=京豆*1888
+          EXCHANGE_GYEC: ${{ secrets.EXCHANGE_GYEC }} #默认=1888京豆
+        
           #微信酱
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           #BARK推送
