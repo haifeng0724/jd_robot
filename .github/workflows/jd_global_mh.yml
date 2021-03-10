@@ -1,23 +1,23 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: 互助码获取_原版(手动)
+name: jd_global_mh 京东国际盲盒 2021-03-31
 
 on:
   workflow_dispatch:
-  #schedule:
-  #  - cron: '0 16,19,22,0 1,2,10,11,20,21,30,31 * *'
+  schedule:
+    - cron: '0 1,4,12,13 * * *'
   # watch:
   #   types: started
   repository_dispatch:
-    types: GetShareCodes
+    types: jd_global_mh
 jobs:
   build:
 
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
-      - name: GetShareCodes
+      - name: Checkout
         run: |
           git clone https://github.com/haifeng0724/jd_robot.git ~/scripts
       - name: Use Node.js ${{ matrix.node-version }}
@@ -31,14 +31,15 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }} # 使用 package-lock.json 的 Hash 作为缓存的 key。也可以使用 package.json 代替
-      - name: '运行 【互助码获取_原版】'
+      - name: '运行 【京东国际盲盒】'
         run: |
           cd  ~/scripts
           npm install
-          node jd_get_share_code.js
+          node jd_global_mh.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_DEBUG: ${{ secrets.JD_DEBUG }}
+
           #微信酱
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           #BARK推送
@@ -57,6 +58,6 @@ jobs:
           #酷推(Cool Push)推送
           QQ_SKEY: ${{ secrets.QQ_SKEY }}
           QQ_MODE: ${{ secrets.QQ_MODE }}
-          #pushplus推送
+                    #pushplus推送
           PUSH_PLUS_TOKEN: ${{ secrets.PUSH_PLUS_TOKEN }}
           PUSH_PLUS_USER: ${{ secrets.PUSH_PLUS_USER }}
