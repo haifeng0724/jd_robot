@@ -5,10 +5,10 @@ name: Local_jd_carnivalcity 手机狂欢城
 
 on:
   workflow_dispatch:
-  # schedule:
-    # - cron: '0 16,0 * * *'
-  # watch:
-  #   types: started
+  schedule:
+    - cron: '0 16,0 * * *'
+  watch:
+    types: started
   repository_dispatch:
     types: jd_carnivalcity
 jobs:
@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Checkout
         run: |
-          git clone https://github.com/haifeng0724/jd_robot.git ~/scripts
+          git clone https://github.com/nbzongzong/jd_scripts1207.git ~/scripts
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -39,6 +39,9 @@ jobs:
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_DEBUG: ${{ secrets.JD_DEBUG }}
+          JD_USER_AGENT: ${{ secrets.JD_USER_AGENT }}
+          
+          JD818_SHARECODES: ${{ secrets.JD818_SHARECODES }}
           
 
           #微信酱

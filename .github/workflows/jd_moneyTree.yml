@@ -6,9 +6,9 @@ name: jd_moneyTree 京东摇钱树
 on:
   workflow_dispatch:
   schedule:
-    - cron: '40 */2 * * *'
-  # watch:
-  #   types: started
+    - cron: '40 0-23/2 * * *'
+  watch:
+    types: started
   repository_dispatch:
     types: moneyTree
 jobs:
@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Checkout
         run: |
-          git clone https://github.com/haifeng0724/jd_robot.git ~/scripts
+          git clone https://github.com/nbzongzong/jd_scripts1207.git ~/scripts
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -39,7 +39,11 @@ jobs:
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_DEBUG: ${{ secrets.JD_DEBUG }}
+          JD_USER_AGENT: ${{ secrets.JD_USER_AGENT }}
+          
           MONEY_TREE_SELL_FRUIT: ${{ secrets.MONEY_TREE_SELL_FRUIT }} #摇钱树是否卖出金果,true卖出，false不卖出
+          MONEYTREE_NOTIFY_CONTROL: ${{ secrets.MONEYTREE_NOTIFY_CONTROL }}
+          
           #微信酱
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           #BARK推送

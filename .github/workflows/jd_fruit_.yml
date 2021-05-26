@@ -6,9 +6,9 @@ name: jd_fruit 东东农场
 on:
   workflow_dispatch:
   schedule:
-    - cron: '20 23,4,10 * * *'
-  # watch:
-  #   types: started
+    - cron: '20 16,4,10 * * *'
+  watch:
+    types: started
   repository_dispatch:
     types: jd_fruit
 jobs:
@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Checkout
         run: |
-          git clone https://github.com/haifeng0724/jd_robot.git ~/scripts
+          git clone https://github.com/nbzongzong/jd_scripts1207.git ~/scripts
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -40,6 +40,7 @@ jobs:
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_DEBUG: ${{ secrets.JD_DEBUG }}
+          JD_USER_AGENT: ${{ secrets.JD_USER_AGENT }}
 
           FRUITSHARECODES: ${{ secrets.FRUITSHARECODES }}
           FRUIT_BEAN_CARD: ${{ secrets.FRUIT_BEAN_CARD }}

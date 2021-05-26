@@ -1,12 +1,12 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: jd_speed_sign 京东极速版签到+赚现金任务
+name: jd_speed_sign 极速版签到+赚现金任务
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '30 16 * * *'
+    - cron: '6 16 * * *'
   # watch:
   #   types: started
   repository_dispatch:
@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Checkout
         run: |
-          git clone https://github.com/haifeng0724/jd_robot.git ~/scripts
+          git clone https://github.com/nbzongzong/jd_scripts1207.git ~/scripts
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -31,7 +31,7 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }} # 使用 package-lock.json 的 Hash 作为缓存的 key。也可以使用 package.json 代替
-      - name: '运行 【京东极速版签到+赚现金任务】'
+      - name: '运行 【京东极速版签到+赚现金任务(用时很长)】'
         run: |
           cd  ~/scripts
           npm install
@@ -39,7 +39,8 @@ jobs:
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_DEBUG: ${{ secrets.JD_DEBUG }}
-          
+          JD_USER_AGENT: ${{ secrets.JD_USER_AGENT }}
+          JS_USER_AGENT: ${{ secrets.JS_USER_AGENT }}
 
           #微信酱
           PUSH_KEY: ${{ secrets.PUSH_KEY }}

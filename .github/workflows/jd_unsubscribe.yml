@@ -1,16 +1,16 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: jd_unsubscribe 京东取关商品
+name: jd_unsubscribe 取关店铺和商品
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 15 * * *'
-  # watch:
-  #       types: started
+    - cron: '0 1 * * *' #此处为UTC-0时间
+  watch:
+    types: started
   repository_dispatch:
-    types: unsubscribe
+    types: jd_unsubscribe
 jobs:
   build:
 
@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Checkout
         run: |
-          git clone https://github.com/haifeng0724/jd_robot.git ~/scripts
+          git clone https://github.com/nbzongzong/jd_scripts1207.git ~/scripts
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -35,12 +35,17 @@ jobs:
         run: |
           cd  ~/scripts
           npm install
+
           node jd_unsubscribe.js
+        
+          
+          
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_DEBUG: ${{ secrets.JD_DEBUG }}
-          UN_SUBSCRIBES: ${{ secrets.UN_SUBSCRIBES }}
+          JD_USER_AGENT: ${{ secrets.JD_USER_AGENT }}
           
+          UN_SUBSCRIBES: ${{ secrets.UN_SUBSCRIBES }}
           #微信酱
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           #BARK推送
